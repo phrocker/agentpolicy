@@ -1,0 +1,24 @@
+agents:
+  - id: "agent_001"
+    type: "task_agent"
+    task: "data_processing"
+
+policies:
+  - policy_id: "policy_001"
+    conditions:
+      - type: "phi_check"
+        description: "Ensure no PHI/PII data is being handled"
+    actions:
+      - type: "log_task"
+        description: "Log the task performed by the agent"
+
+pipeline:
+  - "policy_001"
+
+conditions:
+  - type: "phi_check"
+    description: "Ensure no PHI/PII data is being handled"
+
+actions:
+  - type: "log_task"
+    description: "Log the task performed by the agent"

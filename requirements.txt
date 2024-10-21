@@ -1,0 +1,7 @@
+gym==0.26.2
+pdpbox==0.2.1
+casbin==1.9.1
+policyenforcement==1.0.4
+Flask-RBAC==0.5.0
+spacy==3.5.0
+presidio-analyzer==2.2.24
