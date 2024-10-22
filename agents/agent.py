@@ -1,19 +1,26 @@
 class Agent:
-    def __init__(self, agent_id, task, platform):
+    def __init__(self, agent_id, task, platform, metadata=None):
         self.agent_id = agent_id
         self.task = task
         self.platform = platform
+        self.metadata = metadata if metadata else {}
         self.policies = []
+        self.confidence_score = 0.0
 
     def add_policy(self, policy):
         self.policies.append(policy)
 
     def execute_pipeline(self):
+        total_score = 0.0
         for policy in self.policies:
-            if not policy.evaluate(self):
+            policy_score = policy.evaluate(self)
+            if policy_score == 0:
                 print(f"Agent {self.agent_id} failed at policy {policy.policy_id}.")
                 return False
+            total_score += policy_score
             policy.enforce(self)
+        self.confidence_score = total_score / len(self.policies)
+        print(f"Agent {self.agent_id} achieved a confidence score of {self.confidence_score:.2f} for policy adherence.")
         return True
 
     def execute_on_platform(self):

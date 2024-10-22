@@ -1,7 +1,6 @@
 import yaml
 from agents.task_agent import TaskAgent
 from policies.policy import Policy
-from policies.pipeline import PolicyPipeline
 from policies.condition import Condition, PHICondition
 from policies.action import Action
 from policy_engine.policy_engine import PolicyEngine

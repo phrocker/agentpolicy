@@ -5,7 +5,12 @@ class Policy:
         self.actions = actions
 
     def evaluate(self, agent):
-        return all(condition.check(agent) for condition in self.conditions)
+        total_score = 0.0
+        for condition in self.conditions:
+            condition_score = condition.check(agent)
+            total_score += condition_score
+        average_score = total_score / len(self.conditions) if self.conditions else 1.0
+        return average_score
 
     def enforce(self, agent):
         for action in self.actions:
